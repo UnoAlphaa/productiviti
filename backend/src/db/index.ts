@@ -5,7 +5,7 @@ import { ENV } from "../config/env";
 
 
 if (!ENV.DATABASE_URL){
-    throw new Error("DATABASE_URL not found in environment virable");
+    throw new Error("DATABASE_URL not found in environment variables");
 }
 
 //initialization of postgress connection pool 
