@@ -73,16 +73,14 @@ export const getProductsByUsersId = async (userId:string)=>{
 };
 
 export const updateProduct = async(id:string, data:Partial<NewProduct>)=>{
-    const existingProduct = await getProductById(id);
-    if(!existingProduct) throw new Error(`product with ${id} does not exist`);
     const [product] = await db.update(products).set(data).where(eq(products.id,id)).returning();
+     if(!product) throw new Error(`product with ${id} does not exist`);
     return product;
 };
 
 export const deleteProduct = async(id:string) => {
-    const existingProduct = await getProductById(id);
-    if(!existingProduct) throw new Error(`product with ${id} does not exist`);
     const [product] = await db.delete(products).where(eq(products.id, id)).returning();
+     if(!product) throw new Error(`product with ${id} does not exist`);
     return product;
 };
 
