@@ -20,8 +20,8 @@ export const getMyProducts = async (req:Request,res:Response)=>{
         const {userId} = getAuth(req);
         if(!userId) return res.status(401).json({error : "Unauthorized"});
 
-        const product = await queries.getProductById(userId);
-        return res.status(200).json(product);
+        const products = await queries.getProductsByUsersId(userId);
+        return res.status(200).json(products);
     } catch (error) {
         console.error("Failed to fetch Products", error);
         res.status(500).json({error : "Failed to fetch your produts"})
@@ -32,9 +32,9 @@ export const getProductById = async (req:Request, res:Response)=> {
     try {
         const {id} = req.params;
         const productId = Array.isArray(id) ? id[0] : id;
-        const product = await queries.getProductById(productId);
-        if(!product) return res.status(404).json({error : "Product not found"});
-        return res.status(200).json(product);
+        const products = await queries.getProductById(productId);
+        if(!products) return res.status(404).json({error : "Product not found"});
+        return res.status(200).json(products);
     } catch (error) {
         console.log("failed to fetch product with this id", error)
         res.status(500).json({error : "Failed to fetch the product with this ID"})
@@ -115,7 +115,7 @@ export const deleteProduct = async (req:Request, res:Response) => {
     }
 
     if(existingProduct.userId !== userId){
-        res.status(403).json({error : "You can only Delete your own product "});
+       return res.status(403).json({error : "You can only Delete your own product "});
     }
     await queries.deleteProduct(productId);
     res.status(200).json({message : "Product Deleted Successfully"})

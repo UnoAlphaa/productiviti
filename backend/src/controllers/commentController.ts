@@ -9,7 +9,7 @@ export const createComment = async (req:Request, res:Response)=> {
 
         const {id} = req.params;
         const productId = Array.isArray(id) ? id[0] : id;
-        const content = req.body;
+        const {content} = req.body;
 
         if(!content) return res.status(400).json({error : "Comment content is required"});
 

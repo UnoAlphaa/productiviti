@@ -15,9 +15,9 @@ router.get("/:id", productController.getProductById);
 router.post("/", requireAuth() ,productController.createProduct);
 
 //PUT /api/products/:id - Update a new Product (protected)
-router.post("/:id", requireAuth() ,productController.updateProduct);
+router.put("/:id", requireAuth() ,productController.updateProduct);
 
 //DELETE /api/products/:id - Delete a new Product (protected)
-router.post("/:id", requireAuth() ,productController.deleteProduct);
+router.delete("/:id", requireAuth() ,productController.deleteProduct);
 
 export default router;
