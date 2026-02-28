@@ -1,0 +1,1 @@
+/// <refrence types="@clerk/express/env" />

@@ -4,6 +4,10 @@ import cors from "cors"
 import {ENV} from "./config/env"
 import { clerkMiddleware } from '@clerk/express';
 
+import userRoutes from "./routes/userRoutes"
+import productRoutes from "./routes/productRoutes"
+import commentRoutes from "./routes/commentRoutes"
+
 
 const app = express();
 
@@ -22,5 +26,9 @@ app.get("/", (req, res)=>{
 
     });
 })
+
+app.get("/api/users", userRoutes);
+app.get("/api/products", productRoutes);
+app.get("/api/comment", commentRoutes);
 
 app.listen(ENV.PORT, () => console.log(`server is running on port ${ENV.PORT}`));
