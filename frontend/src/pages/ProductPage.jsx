@@ -1,4 +1,4 @@
-import CommentsSection from "../components/commentsSection";
+import CommentsSection from "../components/CommentsSection";
 import { ArrowLeftIcon, EditIcon, Trash2Icon, CalendarIcon, UserIcon } from "lucide-react";
 import {useAuth} from "@clerk/clerk-react"
 import { useParams, useNavigate,Link, data } from "react-router";

@@ -5,7 +5,7 @@ import { PlusIcon, PackageIcon, EyeIcon, EditIcon, Trash2Icon } from "lucide-rea
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const { data: products, isLoading } = useMyProducts();
+  const { data: products = [], isLoading, error } = useMyProducts();
   const deleteProduct = useDeleteProduct();
 
   const handleDelete = (id) => {
@@ -13,6 +13,17 @@ const ProfilePage = () => {
   };
 
   if (isLoading) return <LoadingSpinner />;
+
+  if (error) {
+    return (
+      <div className="card bg-base-300">
+        <div className="card-body items-center text-center py-10">
+          <h3 className="card-title text-error">Failed to load products</h3>
+          <p className="text-sm text-base-content/60">Please try again.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -30,12 +41,12 @@ const ProfilePage = () => {
       <div className="stats bg-base-300 w-full">
         <div className="stat">
           <div className="stat-title">Total Products</div>
-          <div className="stat-value text-primary">{products?.length || 0}</div>
+          <div className="stat-value text-primary">{products.length || 0}</div>
         </div>
       </div>
 
       {/* Products */}
-      {products?.length === 0 ? (
+      {products.length === 0 ? (
         <div className="card bg-base-300">
           <div className="card-body items-center text-center py-16">
             <PackageIcon className="size-16 text-base-content/20" />
